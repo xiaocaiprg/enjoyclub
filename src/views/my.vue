@@ -39,7 +39,7 @@
       <div class="has-login">
         <img
           class="user-pic"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQsx_4JDuatMkr6t7daPzot_cetmDrsCap_Q&usqp=CAU"
+          src="http://www.enjoyclub.shop/image/ima1111111111111113333ges.png"
           alt=""
         />
         <div class="user-name">{{ userInfo.userName }}</div>

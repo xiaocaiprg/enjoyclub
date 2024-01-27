@@ -1,4 +1,4 @@
-import { get, post } from "../api/index";
+import { get } from "../api/index";
 const PATH = {
   GET_USER_INFO: "haiyang/user/token",
 };

@@ -44,6 +44,9 @@
         />
         <div class="user-name">{{ userInfo.userName }}</div>
       </div>
+      <div class="my-intergral">
+        我的积分：<span class="intergral">{{ userInfo.integral }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -87,11 +90,10 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .my {
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 3rem;
   margin-top: 4rem;
 }
@@ -117,7 +119,13 @@ export default {
     font-size: 1.5rem;
   }
 }
-
+.my-intergral {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  .intergral {
+    color: #ff6633;
+  }
+}
 .van-button {
   width: 20rem;
 }

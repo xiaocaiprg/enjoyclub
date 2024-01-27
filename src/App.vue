@@ -20,13 +20,28 @@ export default {
   name: "App",
   mixins: [mixins],
   data() {
-    return {
-      activeTab: 0,
-    };
+    return {};
   },
   computed: {
     showTabbar() {
       return ["/", "/order", "/my"].includes(this.$route.path);
+    },
+    activeTab: {
+      get() {
+        switch (this.$route.path) {
+          case "/":
+            return 0;
+          case "/order":
+            return 1;
+          case "/my":
+            return 2;
+          default:
+            return 0;
+        }
+      },
+      set(val) {
+        return val;
+      },
     },
   },
   mounted() {},

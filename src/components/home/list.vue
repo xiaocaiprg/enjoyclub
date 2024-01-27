@@ -7,25 +7,29 @@
     @load="onLoad"
   >
     <div
-      v-for="(item, index) in list"
+      v-for="(item, index) in productList"
       :key="index"
       class="card"
-      @click="onCardClick"
+      @click="onCardClick(item)"
     >
-      <img :src="item.pic" class="card-pic" alt="" />
+      <img :src="item.pics" class="card-pic" alt="" />
       <div class="card-right">
         <div class="top">
-          <div class="title">{{ item.title }}</div>
-          <div class="desc">{{ item.desc }}</div>
+          <div class="title">{{ item.productName }}</div>
+          <div class="desc">{{ item.descrip }}</div>
         </div>
         <div class="label">
-          <div v-for="(tag, index) in item.tags" :key="index" class="tag">
+          <div
+            v-for="(tag, index) in item.lables.split(',')"
+            :key="index"
+            class="tag"
+          >
             {{ tag }}
           </div>
         </div>
 
         <div class="bottom">
-          <div class="price">{{ `${item.price}积分` }}</div>
+          <div class="price">{{ `${item.integral}积分` }}</div>
           <div class="btn">购买</div>
         </div>
       </div>
@@ -36,53 +40,27 @@
 <script>
 export default {
   name: "FilterList",
+  props: {
+    productList: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data() {
     return {
-      list: [
-        {
-          pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs1mBWwe96HjVxNTPD96n2RlAjzSPhRJ_ZILspeUZClFUcd0wjP6-Vlyqu_6cCAZ0tVo8&usqp=CAU",
-          title: "商品标题商品标题",
-          desc: "商品简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介",
-          price: 99,
-          tags: ["高端定制", "深度体验"],
-        },
-        {
-          pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs1mBWwe96HjVxNTPD96n2RlAjzSPhRJ_ZILspeUZClFUcd0wjP6-Vlyqu_6cCAZ0tVo8&usqp=CAU",
-          title: "商品标题商品标题",
-          desc: "商品简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介",
-          price: 99,
-          tags: ["高端定制", "深度体验"],
-        },
-        {
-          pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs1mBWwe96HjVxNTPD96n2RlAjzSPhRJ_ZILspeUZClFUcd0wjP6-Vlyqu_6cCAZ0tVo8&usqp=CAU",
-          title: "商品标题商品标题",
-          desc: "商品简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介",
-          price: 99,
-          tags: ["高端定制", "深度体验"],
-        },
-        {
-          pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs1mBWwe96HjVxNTPD96n2RlAjzSPhRJ_ZILspeUZClFUcd0wjP6-Vlyqu_6cCAZ0tVo8&usqp=CAU",
-          title: "商品标题商品标题",
-          desc: "商品简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介",
-          price: 99,
-          tags: ["高端定制", "深度体验"],
-        },
-        {
-          pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs1mBWwe96HjVxNTPD96n2RlAjzSPhRJ_ZILspeUZClFUcd0wjP6-Vlyqu_6cCAZ0tVo8&usqp=CAU",
-          title: "商品标题商品标题",
-          desc: "商品简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介",
-          price: 99,
-          tags: ["高端定制", "深度体验"],
-        },
-      ],
       loading: false,
       finished: true,
     };
   },
+  computed: {},
+
   methods: {
     onLoad() {},
-    onCardClick() {
-      this.$router.push("/detail");
+    onCardClick(item) {
+      this.$router.push({
+        path: "/detail",
+        query: { productid: item.productId },
+      });
     },
   },
 };
@@ -102,15 +80,16 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     margin-left: 1rem;
+    flex: 1;
+    overflow: hidden;
     .title {
       font-family: "PingFangSC-Semibold";
       font-size: 1.8rem;
       color: #222;
       display: -webkit-box;
-      text-overflow: ellipsis;
-      white-space: nowrap;
       overflow: hidden;
-      width: 100%;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
     .desc {
       font-family: "PingFangSC-Regular";

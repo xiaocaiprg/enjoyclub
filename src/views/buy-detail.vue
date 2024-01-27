@@ -1,9 +1,9 @@
 <template>
-  <div class="product">
+  <div v-if="product" class="product">
     <div
       class="bg"
       :style="{
-        backgroundImage: `url(${product.pic})`,
+        backgroundImage: `url(${product.pics})`,
       }"
     >
       <van-nav-bar
@@ -15,12 +15,12 @@
       />
     </div>
     <div class="product-detail">
-      <div class="title">{{ product.title }}</div>
-      <div class="desc">{{ product.desc }}</div>
-      <div class="price">{{ `${product.price}积分` }}</div>
+      <div class="title">{{ product.productName }}</div>
+      <div class="desc">{{ product.descrip }}</div>
+      <div class="price">{{ `${product.integral}积分` }}</div>
       <div class="line"></div>
       <div class="label">
-        <div v-for="(tag, index) in product.tags" :key="index" class="tag">
+        <div v-for="(tag, index) in labels" :key="index" class="tag">
           {{ tag }}
         </div>
       </div>
@@ -31,33 +31,58 @@
 
 <script>
 import { Dialog, Toast } from "vant";
+import { mixins } from "../lib/mixin";
+import API from "@/api/home";
 export default {
   name: "BuyDetail",
+  mixins: [mixins],
   data() {
     return {
-      product: {
-        pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs1mBWwe96HjVxNTPD96n2RlAjzSPhRJ_ZILspeUZClFUcd0wjP6-Vlyqu_6cCAZ0tVo8&usqp=CAU",
-        title: "商品标题商品标题",
-        desc: "商品简介简介简介简介简介简介简介简介简介简介简介商品简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介商品简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介商品简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介",
-        price: 99,
-        tags: ["高端定制", "深度体验"],
-      },
+      product: {},
     };
+  },
+  computed: {
+    labels() {
+      return (this.product.lables && this.product.lables.split(",")) || [];
+    },
+  },
+  mounted() {
+    const { productid } = this.$route.query;
+    productid && this.getProductDetail(productid);
   },
   methods: {
     onClickLeft() {
       this.$router.back();
     },
+    getProductDetail(id) {
+      API.getProductDetail(id).then(res => {
+        this.product = res;
+      });
+    },
+    buyProduct() {
+      this.getUserInfo().then(res => {
+        if (res) {
+          const params = {
+            userId: res.userId,
+            productId: this.product.productId,
+            orderCount: 1,
+          };
+          API.buyProduct(params).then(res => {
+            res && Toast.success("下单成功");
+            setTimeout(() => {
+              this.$router.push("/order");
+            }, 1000);
+          });
+        }
+      });
+    },
     onBuy() {
       Dialog.confirm({
         title: "确认下单?",
-        message: `需要消耗${this.product.price}积分`,
+        message: `需要消耗${this.product.integral}积分`,
       })
         .then(() => {
-          Toast.success("下单成功");
-          setTimeout(() => {
-            this.$router.push("/order");
-          }, 1000);
+          this.buyProduct();
           // on confirm
         })
         .catch(() => {

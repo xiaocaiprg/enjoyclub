@@ -1,14 +1,14 @@
-import { get, post } from "./index";
+import { get } from "./index";
 
 const PATH = {
-  LOGIN: "haiyang/user/login",
+  GET_ORDERS: "/haiyang/order",
 };
 const API = {
-  login(params) {
-    return post(PATH.LOGIN, params)
+  getOrders(params) {
+    return get(PATH.GET_ORDERS, params)
       .then(res => {
         if (res.code === 200) {
-          return res.success;
+          return res.result;
         }
       })
       .catch(err => {

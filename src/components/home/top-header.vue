@@ -15,10 +15,19 @@ export default {
     return {
       banner: [
         {
-          url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2m74jy9o9uUcH34PnU8nc0AaVnvlldeB1_A&usqp=CAU",
+          url: "http://www.enjoyclub.shop/image/FB_Chrhdf6754over_31_6.jpg",
         },
         {
-          url: "https://www.luxetravel.com.hk/Images/Homepage/FB_Cover_31_6.jpg",
+          url: " http://www.enjoyclub.shop/image/im654365436ages.jpg",
+        },
+        {
+          url: "http://www.enjoyclub.shop/image/wKgBEFsGZwyAdZxCAAP2FbEBi6U68.jpeg",
+        },
+        {
+          url: "http://www.enjoyclub.shop/image/car_1_1_4cd1174e27834539ad6bbf3e509e0e4a.jpg",
+        },
+        {
+          url: "http://www.enjoyclub.shop/image/wKgBs1gz0Z2AD9c3AANPN8srUNM66.jpeg",
         },
       ],
     };

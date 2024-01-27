@@ -2,13 +2,13 @@
   <div class="tab-wrapper">
     <div class="tab">
       <div
-        class="tab-item"
-        v-for="(item, index) in tabs"
+        v-for="(item, index) in category"
         :key="index"
+        class="tab-item"
         @click="onChangeTab(item, index)"
       >
         <img class="icon" :src="item.icon" alt="" />
-        <div class="text">{{ item.text }}</div>
+        <div class="text">{{ item.categoryName }}</div>
       </div>
     </div>
     <div class="line"></div>
@@ -20,7 +20,7 @@
         :class="{ active: curSecIndex === key }"
         @click="onclickSub(sub, key)"
       >
-        {{ sub.subtext }}
+        {{ sub.subcategoryName }}
       </div>
     </div>
   </div>
@@ -29,89 +29,39 @@
 <script>
 export default {
   name: "TabBanner",
+  props: {
+    category: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data() {
     return {
-      tabs: [
-        {
-          icon: "https://i.postimg.cc/Bby73RLN/2730361-inkcontober-mountain-mountain-sunrise-trail-icon.png",
-          text: "旅游定制",
-          subTab: [
-            {
-              subtext: "大陆",
-            },
-            {
-              subtext: "香港",
-            },
-            {
-              subtext: "美国",
-            },
-            {
-              subtext: "大陆",
-            },
-            {
-              subtext: "香港",
-            },
-            {
-              subtext: "美国",
-            },
-            {
-              subtext: "大陆",
-            },
-            {
-              subtext: "香港",
-            },
-            {
-              subtext: "美国",
-            },
-          ],
-        },
-        {
-          icon: "https://i.postimg.cc/SRDzpBg5/4082091-healthcare-hospital-medical-icon.png",
-          text: "健康咨询",
-          subTab: [
-            {
-              subtext: "骨科",
-            },
-            {
-              subtext: "呼吸科",
-            },
-            {
-              subtext: "外科",
-            },
-          ],
-        },
-        {
-          icon: "https://i.postimg.cc/c4zrMM2Q/6843035-exchange-goods-investment-money-product-icon.png",
-          text: "甄选好物",
-          subTab: [
-            {
-              subtext: "百货",
-            },
-            {
-              subtext: "运动",
-            },
-            {
-              subtext: "饰品",
-            },
-          ],
-        },
-      ],
       curIndex: 0,
       curSecIndex: 0,
+      categoryIds: {
+        categoryId: 1,
+        subcategoryId: 1,
+      },
     };
   },
   computed: {
     subTabs() {
-      return this.tabs[this.curIndex].subTab;
+      return this.category[this.curIndex].subcategorys;
     },
   },
   methods: {
     onChangeTab(item, index) {
       this.curIndex = index;
       this.curSecIndex = 0;
+      this.categoryIds = item.categoryId;
+      this.categoryIds.subcategoryId = this.subTabs[0].subcategoryId;
+      this.$emit("changeTab", this.categoryIds);
     },
     onclickSub(item, key) {
       this.curSecIndex = key;
+      this.categoryIds.subcategoryId = item.subcategoryId;
+      this.$emit("changeTab", this.categoryIds);
     },
   },
 };

@@ -1,11 +1,12 @@
 import axios from "axios";
 const instance = axios.create({
   baseURL: "http://www.enjoyclub.shop/",
-  timeout: 5000,
+  timeout: 50000,
   withCredentials: true,
   headers: {
     "X-Requested-With": "XMLHttpRequest",
     "Content-Type": "application/json",
+    "Cache-Control": "no-cache",
   },
 });
 const get = (url, params = {}) => {
@@ -34,4 +35,5 @@ const post = (url, params = {}) => {
       });
   });
 };
+
 export { get, post };

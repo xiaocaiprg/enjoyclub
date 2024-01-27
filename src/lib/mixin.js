@@ -12,6 +12,7 @@ export const mixins = {
         return parts.pop().split(";").shift();
       }
     },
+
     getUserInfo() {
       const token = this.getCookie("token") || "";
       if (token) {
@@ -27,6 +28,12 @@ export const mixins = {
       } else {
         return Promise.resolve("");
       }
+    },
+    handleErr(err) {
+      if (err.response && err.response.status === 406) {
+        this.$route.path !== "/my" && this.$router.push("/my");
+      }
+      console.log(err, "handleErr");
     },
   },
 };

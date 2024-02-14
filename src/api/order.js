@@ -30,5 +30,18 @@ const API = {
         throw err;
       });
   },
+  getSingleOrder(id) {
+    return http
+      .get(`${PATH.GET_ORDERS}/${id}`)
+      .then(res => {
+        if (res.code === 200) {
+          return res.result;
+        }
+        throw res;
+      })
+      .catch(err => {
+        throw err;
+      });
+  },
 };
 export default API;

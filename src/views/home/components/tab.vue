@@ -81,11 +81,12 @@ export default {
     flex-direction: column;
     align-items: center;
     .icon {
-      height: 4rem;
-      width: 4rem;
+      height: 3rem;
+      width: 3rem;
     }
     .text {
       font-size: 1.5rem;
+      font-weight: 600;
     }
   }
 }

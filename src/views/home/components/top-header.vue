@@ -39,7 +39,7 @@ export default {
 .top-header {
   .carousel {
     width: 100%;
-    height: 20rem;
+    height: 16rem;
     .pic {
       height: 100%;
       width: 100%;

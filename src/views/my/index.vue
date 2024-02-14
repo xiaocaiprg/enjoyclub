@@ -181,8 +181,16 @@
           </van-cell-group>
         </van-dialog>
       </div>
+      <div class="ads">
+        <van-icon name="like-o" style="margin-right: 0.3rem" />更多服务敬请期待
+      </div>
       <div class="common-functions">
         <h1 style="margin-bottom: 1rem">常用功能</h1>
+        <div class="common-function-item">
+          <van-icon name="chat-o" />
+          <span class="item-label">我的通知</span>
+        </div>
+        <van-divider style="margin: 0.5rem" />
         <div class="common-function-item">
           <van-icon name="location-o" />
           <span class="item-label">地址管理</span>
@@ -379,7 +387,6 @@ export default {
       padding: 0 2rem;
       font-weight: 600;
       background-color: #fbfbfb;
-
       margin-top: 0.5rem;
       .info-wrapper {
         display: flex;
@@ -389,6 +396,17 @@ export default {
         }
       }
     }
+  }
+  .ads {
+    display: flex;
+    padding: 1rem;
+    margin: 1rem 2rem;
+    background-color: #fbfbfb;
+    border-radius: 1rem;
+    height: 8rem;
+    font-size: 1.8rem;
+    align-items: center;
+    font-weight: 600;
   }
   .common-functions {
     padding: 1rem;

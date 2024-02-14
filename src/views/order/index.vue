@@ -35,14 +35,17 @@
             </template>
             <template #footer>
               <van-button
-                v-if="item.orderStatus === OrderStatusEnum.HASPAYED"
+                v-if="
+                  item.orderStatus === OrderStatusEnum.HASPAYED ||
+                  item.orderStatus === OrderStatusEnum.CONFIRM
+                "
                 size="mini"
                 color="#ff6633"
                 @click="onConfirm(item)"
               >
                 确认收货
               </van-button>
-              <van-button size="mini" @click="onCheck"> 查看 </van-button>
+              <van-button size="mini" @click="onCheck(item)"> 查看 </van-button>
             </template>
           </van-card>
         </div>
@@ -69,7 +72,6 @@
 <script>
 import { mixins } from "@/lib/mixin";
 import API from "@/api/order";
-import { Dialog } from "vant";
 import { OrderStatus, OrderStatusEnum } from "@/lib/config.ts";
 export default {
   name: "Order",
@@ -77,7 +79,7 @@ export default {
   mixins: [mixins],
   data() {
     return {
-      orderValue: "0",
+      orderValue: "all",
       ordersData: [],
       orderTab: [
         {
@@ -148,7 +150,12 @@ export default {
     tagLabel(order) {
       return OrderStatus.find(item => item.value === order.orderStatus)?.label;
     },
-    onCheck() {},
+    onCheck(item) {
+      this.$router.push({
+        path: "/user-orderdetail",
+        query: { orderid: item.orderId },
+      });
+    },
     onConfirm(item) {
       this.showConfirm = true;
       this.currentOrder = item;

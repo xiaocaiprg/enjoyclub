@@ -12,7 +12,7 @@
       class="card"
       @click="onCardClick(item)"
     >
-      <img :src="item.pics" class="card-pic" alt="" />
+      <img :src="getPic(item)" class="card-pic" alt="" />
       <div class="card-right">
         <div class="top">
           <div class="title">{{ item.productName }}</div>
@@ -58,6 +58,9 @@ export default {
   computed: {},
 
   methods: {
+    getPic(item) {
+      return item.pics && item.pics.split(",")[0];
+    },
     onLoad() {},
     onCardClick(item) {
       this.$router.push({
@@ -71,13 +74,15 @@ export default {
 
 <style lang="less" scoped>
 .filter-list {
-  padding: 0 1.5rem 50px;
-  margin-top: 2rem;
+  padding: 0 0.5rem 50px;
+  margin-top: 1rem;
 }
 .card {
   display: flex;
   margin-bottom: 2rem;
   border-radius: 2rem;
+  padding: 0 1rem;
+
   .card-right {
     display: flex;
     flex-direction: column;

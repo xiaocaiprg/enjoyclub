@@ -5,12 +5,16 @@ import Home from "../views/home/index.vue";
 import My from "../views/my/index.vue";
 import Order from "../views/order/index.vue";
 import Detail from "../views/home/buy-detail.vue";
+import OrderDetail from "../views/order/order-detail.vue";
+
 Vue.use(Router);
+
 const routes = [
   { path: "/", component: Home },
   { path: "/user-my", component: My },
   { path: "/user-order", component: Order },
   { path: "/user-detail", component: Detail },
+  { path: "/user-orderdetail", component: OrderDetail },
 ];
 
 // 3. 创建 router 实例，然后传 `routes` 配置

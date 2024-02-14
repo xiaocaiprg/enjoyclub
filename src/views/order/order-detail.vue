@@ -73,7 +73,6 @@ export default {
     },
   },
   created() {
-    document.title = "订单详情";
     const { orderid } = this.$route.query;
     orderid && this.getOrderDetail(orderid);
   },

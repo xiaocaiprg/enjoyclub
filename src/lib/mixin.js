@@ -1,22 +1,22 @@
-import { get } from "../api/index";
+import http from "../api/index";
 const PATH = {
   GET_USER_INFO: "haiyang/user/token",
 };
 export const mixins = {
   mounted() {},
   methods: {
-    getCookie(name) {
-      const value = "; " + document.cookie;
-      const parts = value.split("; " + name + "=");
-      if (parts.length === 2) {
-        return parts.pop().split(";").shift();
-      }
+    getLocalStorage() {
+      const authorization = window.localStorage.getItem("authorization");
+      return authorization;
     },
-
+    setLocalStorage(value) {
+      window.localStorage.setItem("authorization", value);
+    },
     getUserInfo() {
-      const token = this.getCookie("token") || "";
-      if (token) {
-        return get(`${PATH.GET_USER_INFO}/${token}`)
+      const authorization = this.getLocalStorage() || "";
+      if (authorization) {
+        return http
+          .get(`${PATH.GET_USER_INFO}`)
           .then(res => {
             if (res.code === 200) {
               return res.result;
@@ -31,7 +31,7 @@ export const mixins = {
     },
     handleErr(err) {
       if (err.response && err.response.status === 406) {
-        this.$route.path !== "/my" && this.$router.push("/my");
+        this.$route.path !== "/user-my" && this.$router.push("/user-my");
       }
       console.log(err, "handleErr");
     },

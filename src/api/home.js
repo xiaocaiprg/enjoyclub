@@ -1,4 +1,4 @@
-import { get, post } from "./index";
+import http from "./index";
 
 const PATH = {
   GET_PRODUCT: "haiyang/product",
@@ -7,7 +7,8 @@ const PATH = {
 };
 const API = {
   getProduct(params) {
-    return get(PATH.GET_PRODUCT, params)
+    return http
+      .get(PATH.GET_PRODUCT, params)
       .then(res => {
         if (res.code === 200) {
           return res.result;
@@ -18,7 +19,8 @@ const API = {
       });
   },
   getProductDetail(id) {
-    return get(`${PATH.GET_PRODUCT}/${id}`)
+    return http
+      .get(`${PATH.GET_PRODUCT}/${id}`)
       .then(res => {
         if (res.code === 200) {
           return res.result;
@@ -29,7 +31,8 @@ const API = {
       });
   },
   getCategory(params) {
-    return get(PATH.GET_CATEGORY, params)
+    return http
+      .get(PATH.GET_CATEGORY, params)
       .then(res => {
         if (res.code === 200) {
           return res.result;
@@ -40,7 +43,8 @@ const API = {
       });
   },
   buyProduct(params) {
-    return post(PATH.BUY, params)
+    return http
+      .post(PATH.BUY, params)
       .then(res => {
         if (res.code === 200) {
           return res.success;

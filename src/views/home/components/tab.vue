@@ -54,7 +54,7 @@ export default {
     onChangeTab(item, index) {
       this.curIndex = index;
       this.curSecIndex = 0;
-      this.categoryIds = item.categoryId;
+      this.categoryIds.categoryId = item.categoryId;
       this.categoryIds.subcategoryId = this.subTabs[0].subcategoryId;
       this.$emit("changeTab", this.categoryIds);
     },

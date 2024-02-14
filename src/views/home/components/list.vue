@@ -18,14 +18,17 @@
           <div class="title">{{ item.productName }}</div>
           <div class="desc">{{ item.descrip }}</div>
         </div>
-        <div class="label">
-          <div
-            v-for="(tag, index) in item.lables.split(',')"
+        <div v-if="item.labels" class="label">
+          <van-tag
+            v-for="(tag, index) in item.labels.split(',')"
             :key="index"
+            plain
+            color="#fed1ce"
+            text-color="#ff4a4a"
             class="tag"
           >
             {{ tag }}
-          </div>
+          </van-tag>
         </div>
 
         <div class="bottom">
@@ -58,7 +61,7 @@ export default {
     onLoad() {},
     onCardClick(item) {
       this.$router.push({
-        path: "/detail",
+        path: "/user-detail",
         query: { productid: item.productId },
       });
     },
@@ -88,22 +91,23 @@ export default {
       color: #222;
       display: -webkit-box;
       overflow: hidden;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
     }
     .desc {
       font-family: "PingFangSC-Regular";
       font-size: 1.2rem;
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
     .label {
       display: flex;
+      margin-top: 0.2rem;
       .tag {
-        background: #fff5f4;
-        border: 1px solid #fed1ce;
-        border-radius: 2px;
-        margin-right: 0.4rem;
-        padding: 2px 4px;
-        color: #ff4a4a;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
       }
     }
     .bottom {

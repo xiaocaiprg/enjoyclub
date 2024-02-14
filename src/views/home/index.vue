@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import TopHeader from "../components/home/top-header.vue";
-import TabBanner from "../components/home/tab.vue";
-import FilterList from "../components/home/list.vue";
+import TopHeader from "./components/top-header.vue";
+import TabBanner from "./components/tab.vue";
+import FilterList from "./components/list.vue";
 import API from "@/api/home.js";
-import { mixins } from "../lib/mixin";
+import { mixins } from "../../lib/mixin";
 
 export default {
   name: "Home",
@@ -71,16 +71,20 @@ export default {
         pageNum: 1,
         pageSize: 100,
       };
-      API.getCategory(params).then(res => {
-        this.category = (res || []).map((item, index) => {
-          return {
-            ...item,
-            icon: this.catePic[index],
-          };
+      API.getCategory(params)
+        .then(res => {
+          this.category = (res || []).map((item, index) => {
+            return {
+              ...item,
+              icon: this.catePic[index],
+            };
+          });
+          this.categoryId = this.category[0].categoryId;
+          this.subcategoryId = this.category[0].subcategorys[0].subcategoryId;
+        })
+        .catch(err => {
+          this.handleErr(err);
         });
-        this.categoryId = this.category[0].categoryId;
-        this.subcategoryId = this.category[0].subcategorys[0].subcategoryId;
-      });
     },
     changeTab(item) {
       this.categoryIds = item;

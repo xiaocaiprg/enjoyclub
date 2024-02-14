@@ -24,16 +24,16 @@ export default {
   },
   computed: {
     showTabbar() {
-      return ["/", "/order", "/my"].includes(this.$route.path);
+      return ["/", "/user-order", "/user-my"].includes(this.$route.path);
     },
     activeTab: {
       get() {
         switch (this.$route.path) {
           case "/":
             return 0;
-          case "/order":
+          case "/user-order":
             return 1;
-          case "/my":
+          case "/user-my":
             return 2;
           default:
             return 0;
@@ -49,10 +49,11 @@ export default {
     onChange(index) {
       switch (index) {
         case 1:
-          this.$route.path !== "/order" && this.$router.push("/order");
+          this.$route.path !== "/user-order" &&
+            this.$router.push("/user-order");
           break;
         case 2:
-          this.$route.path !== "/my" && this.$router.push("/my");
+          this.$route.path !== "/user-my" && this.$router.push("/user-my");
           break;
         case 0:
           this.$route.path !== "/" && this.$router.push("/");

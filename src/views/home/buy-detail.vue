@@ -31,7 +31,7 @@
 
 <script>
 import { Dialog, Toast } from "vant";
-import { mixins } from "../lib/mixin";
+import { mixins } from "../../lib/mixin";
 import API from "@/api/home";
 export default {
   name: "BuyDetail",
@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     labels() {
-      return (this.product.lables && this.product.lables.split(",")) || [];
+      return (this.product.labels && this.product.labels.split(",")) || [];
     },
   },
   mounted() {
@@ -70,7 +70,7 @@ export default {
           API.buyProduct(params).then(res => {
             res && Toast.success("下单成功");
             setTimeout(() => {
-              this.$router.push("/order");
+              this.$router.push("/user-order");
             }, 1000);
           });
         }
